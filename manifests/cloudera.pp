@@ -43,11 +43,10 @@ class site_hadoop::cloudera {
     'RedHat': {
       if $::operatingsystem != 'Fedora' {
         $majdistrelease = $site_hadoop::majdistrelease
-        file { '/etc/yum.repos.d/cloudera-cdh5.repo':
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0644',
-          content => template('site_hadoop/cloudera.repo.erb'),
+        yumrepo { "cloudera-cdh${version}":
+          descr   => "Cloudera's Distribution for Hadoop, Version ${version}",
+          baseurl => "https://archive.cloudera.com${cdh5_repopath}/${version}/",
+          gpgkey  => "https://archive.cloudera.com${cdh5_repopath}/RPM-GPG-KEY-cloudera"
         }
       }
     }
