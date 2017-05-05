@@ -35,6 +35,7 @@ class site_hadoop::params {
   $cdh5_repopath = $::operatingsystem ? {
     'debian'  => "/cdh5/debian/${::lsbdistcodename}/${::architecture}/cdh",
     'ubuntu'  => "/cdh5/ubuntu/${::lsbdistcodename}/${::architecture}/cdh",
+    'CentOS'  => "/cdh5/redhat/${::facts['os']['release']['major']}/${::architecture}/cdh",
     default => "/cdh5/redhat/${majdistrelease}/${::architecture}/cdh",
   }
 
